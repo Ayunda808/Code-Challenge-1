@@ -2,42 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Mobile Money Transaction Fee Estimator</title>
+  <title>Boda Boda Fare Estimator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      background-color: #f7f7f7;
+    }
+    label, input {
+      display: block;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px;
+      background-color: green;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>📱 Mobile Money Fee Estimator</h1>
-  <button onclick="estimateTransactionFee()">Estimate Fee</button>
-  <pre id="output"></pre>
+
+  <h2>Boda Boda Fare Estimator</h2>
+
+  <label for="distance">Distance (in kilometers):</label>
+  <input type="number" id="distance" placeholder="e.g. 5" required>
+
+  <label for="price">Price per Kilometer (KES):</label>
+  <input type="number" id="price" placeholder="e.g. 30" required>
+
+  <button onclick="calculateFare()">Calculate Fare</button>
+
+  <div id="result"></div>
 
   <script>
-    function estimateTransactionFee() {
-      const input = prompt("Unatuma Ngapi? (KES):");
-      const amountToSend = Number(input);
+    function calculateFare() {
+      const distance = parseFloat(document.getElementById('distance').value);
+      const pricePerKm = parseFloat(document.getElementById('price').value);
 
-      if (isNaN(amountToSend) || amountToSend <= 0) {
-        alert("Tafadhali andika kiasi sahihi.");
+      if (isNaN(distance) || isNaN(pricePerKm)) {
+        document.getElementById('result').textContent = "Please enter valid numbers.";
         return;
       }
 
-      let fee = 0.015 * amountToSend;
-
-      if (fee < 10) {
-        fee = 10;
-      } else if (fee > 70) {
-        fee = 70;
-      }
-
-      const total = amountToSend + fee;
-
-      const result = `Sending KES ${amountToSend}:\n` +
-                     `Calculated Transaction Fee: KES ${fee}\n` +
-                     `Total amount to be debited: KES ${total}\n\n` +
-                     `Send Money Securely!`;
-
-      console.log(result);
-      document.getElementById("output").textContent = result;
+      const totalFare = distance * pricePerKm;
+      document.getElementById('result').textContent = `Estimated Fare: KES ${totalFare.toFixed(2)}`;
     }
   </script>
+
 </body>
 </html>
-

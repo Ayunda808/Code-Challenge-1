@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boda Fare Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f9f9f9;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0 20px;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #27ae60;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #ecf0f1;
+      border-left: 4px solid #2ecc71;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛵 Boda Fare Estimator</h1>
+
+  <label for="distance">Enter distance in kilometers:</label>
+  <input type="number" id="distance" placeholder="e.g. 5" min="0" step="0.1" />
+
+  <button onclick="calculateFare()">Calculate Fare</button>
+
+  <div id="output" class="result"></div>
+
+  <script>
+    function calculateFare() {
+      const distanceInput = document.getElementById("distance").value;
+      const distance = parseFloat(distanceInput);
+
+      if (isNaN(distance) || distance <= 0) {
+        alert("Tafadhali andika nambari sahihi ya kilomita.");
+        return;
+      }
+
+      const baseFare = 50;
+      const chargePerKm = 15;
+      const distanceCharge = distance * chargePerKm;
+      const total = baseFare + distanceCharge;
+
+      document.getElementById("output").innerText =
+        `Uko kwote? Iyo ni ${distance} km\n` +
+        `Ukikalia Pikipiki: KES ${baseFare}\n` +
+        `Mpaka Uko: KES ${distanceCharge}\n` +
+        `Total: KES ${total}\n\n` +
+        `Panda Pikipiki!`;
+    }
+  </script>
+</body>
+</html>
