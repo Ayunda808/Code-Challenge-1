@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chai Bora Ingredient Calculator</title>
+</head>
+<body>
+  <h1>Chai Bora Ingredient Calculator</h1>
+  <button onclick="startCalculator()">Calculate Ingredients</button>
+  <pre id="output"></pre>
+
+  <script>
+    function calculateChaiIngredients(numberOfCups) {
+      const water = 150 * numberOfCups;
+      const milk = 150 * numberOfCups;
+      const teaLeaves = 1 * numberOfCups;
+      const sugar = 3 * numberOfCups;
+
+      return `To make ${numberOfCups} cups of Kenyan Chai, you will need:
+Water: ${water} ml
+Milk: ${milk} ml
+Tea Leaves (Majani): ${teaLeaves} tablespoons
+Sugar (Sukari): ${sugar} teaspoons
+
+Enjoy your Chai Bora!`;
+    }
+
+    function startCalculator() {
+      const input = prompt("Karibu! How many cups of Chai Bora would you like to make?");
+      const cups = Number(input);
+      if (!isNaN(cups) && cups > 0) {
+        const result = calculateChaiIngredients(cups);
+        document.getElementById("output").textContent = result;
+      } else {
+        alert("Please enter a valid number of cups.");
+      }
+    }
+  </script>
+</body>
+</html>
+

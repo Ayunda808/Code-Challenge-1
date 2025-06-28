@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mobile Money Transaction Fee Estimator</title>
+</head>
+<body>
+  <h1>📱 Mobile Money Fee Estimator</h1>
+  <button onclick="estimateTransactionFee()">Estimate Fee</button>
+  <pre id="output"></pre>
+
+  <script>
+    function estimateTransactionFee() {
+      const input = prompt("Unatuma Ngapi? (KES):");
+      const amountToSend = Number(input);
+
+      if (isNaN(amountToSend) || amountToSend <= 0) {
+        alert("Tafadhali andika kiasi sahihi.");
+        return;
+      }
+
+      let fee = 0.015 * amountToSend;
+
+      if (fee < 10) {
+        fee = 10;
+      } else if (fee > 70) {
+        fee = 70;
+      }
+
+      const total = amountToSend + fee;
+
+      const result = `Sending KES ${amountToSend}:\n` +
+                     `Calculated Transaction Fee: KES ${fee}\n` +
+                     `Total amount to be debited: KES ${total}\n\n` +
+                     `Send Money Securely!`;
+
+      console.log(result);
+      document.getElementById("output").textContent = result;
+    }
+  </script>
+</body>
+</html>
+
